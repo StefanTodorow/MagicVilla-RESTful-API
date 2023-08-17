@@ -71,17 +71,7 @@ namespace MagicVilla_VillaAPI.Controllers
             if (villaDTO.Id != 0)
                 return StatusCode(StatusCodes.Status500InternalServerError);
 
-            var model = new Villa()
-            {
-                Name = villaDTO.Name,
-                Amenity = villaDTO.Amenity,
-                Details = villaDTO.Details,
-                Id = villaDTO.Id,
-                ImageUrl = villaDTO.ImageUrl,
-                Occupancy = villaDTO.Occupancy,
-                Rate = villaDTO.Rate,
-                Sqft = villaDTO.Sqft,
-            };
+            var model = new Villa(villaDTO);
 
             _db.Villas.Add(model);
             _db.SaveChanges();
@@ -121,17 +111,7 @@ namespace MagicVilla_VillaAPI.Controllers
             if (villaDTO == null || id != villaDTO.Id)
                 return BadRequest();
 
-            var model = new Villa()
-            {
-                Name = villaDTO.Name,
-                Amenity = villaDTO.Amenity,
-                Details = villaDTO.Details,
-                Id = villaDTO.Id,
-                ImageUrl = villaDTO.ImageUrl,
-                Occupancy = villaDTO.Occupancy,
-                Rate = villaDTO.Rate,
-                Sqft = villaDTO.Sqft,
-            };
+            var model = new Villa(villaDTO);
 
             _db.Villas.Update(model);
             _db.SaveChanges();
@@ -154,34 +134,14 @@ namespace MagicVilla_VillaAPI.Controllers
             if (villa == null)
                 return BadRequest();
 
-            var villaDTO = new VillaDTO()
-            {
-                Name = villa.Name,
-                Amenity = villa.Amenity,
-                Details = villa.Details,
-                Id = villa.Id,
-                ImageUrl = villa.ImageUrl,
-                Occupancy = villa.Occupancy,
-                Rate = villa.Rate,
-                Sqft = villa.Sqft,
-            };
+            var villaDTO = new VillaDTO(villa);
 
             patchDTO.ApplyTo(villaDTO, ModelState);
 
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var model = new Villa()
-            {
-                Name = villaDTO.Name,
-                Amenity = villaDTO.Amenity,
-                Details = villaDTO.Details,
-                Id = villaDTO.Id,
-                ImageUrl = villaDTO.ImageUrl,
-                Occupancy = villaDTO.Occupancy,
-                Rate = villaDTO.Rate,
-                Sqft = villaDTO.Sqft,
-            };
+            var model = new Villa(villaDTO);
 
             _db.Villas.Update(model);
             _db.SaveChanges();

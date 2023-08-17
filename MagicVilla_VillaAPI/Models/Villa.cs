@@ -1,10 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MagicVilla_VillaAPI.Models.Dto;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MagicVilla_VillaAPI.Models
 {
     public class Villa
     {
+        public Villa()
+        {
+            Name = string.Empty;
+            Details = string.Empty;
+            ImageUrl = string.Empty;
+            Amenity = string.Empty;
+        }
+        public Villa(VillaDTO villaDTO)
+        {
+            Id = villaDTO.Id;
+            Name = villaDTO.Name;
+            Details = villaDTO.Details;
+            Rate = villaDTO.Rate;
+            Sqft = villaDTO.Sqft;
+            Occupancy = villaDTO.Occupancy;
+            ImageUrl = villaDTO.ImageUrl;
+            Amenity = villaDTO.Amenity;
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

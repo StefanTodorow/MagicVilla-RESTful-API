@@ -4,6 +4,26 @@ namespace MagicVilla_VillaAPI.Models.Dto
 {
     public class VillaDTO
     {
+        public VillaDTO()
+        {
+            Name = string.Empty;
+            ImageUrl = string.Empty;
+            Details = string.Empty;
+            Amenity = string.Empty;
+        }
+
+        public VillaDTO(Villa villa)
+        {
+            Id= villa.Id;
+            Name= villa.Name;
+            Details= villa.Details;
+            Rate= villa.Rate;
+            Sqft= villa.Sqft;
+            Occupancy= villa.Occupancy;
+            ImageUrl= villa.ImageUrl;
+            Amenity= villa.Amenity;
+        }        
+
         public int Id { get; set; }
         [Required]
         [MaxLength(30)]
