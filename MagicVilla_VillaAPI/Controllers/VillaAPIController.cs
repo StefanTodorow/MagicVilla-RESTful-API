@@ -34,7 +34,9 @@ namespace MagicVilla_VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<VillaDTO> GetVilla(int id)
         {
-            if(id == 0)
+            _logger.LogInformation($"Getting villa with Id: + {id}.");
+
+            if (id == 0)
             {
                 _logger.LogError("GetVilla Error with Id: + " + id);
 
@@ -55,8 +57,9 @@ namespace MagicVilla_VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<VillaDTO> CreateVilla([FromBody]VillaDTO villaDTO)
         {
+            _logger.LogInformation("Creating new villa.");
 
-            if(villaDTO == null)
+            if (villaDTO == null)
                 return BadRequest(villaDTO);
 
             if(_db.Villas.FirstOrDefault(u => u.Name.ToLower() == villaDTO.Name.ToLower()) != null)
@@ -92,6 +95,8 @@ namespace MagicVilla_VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteVilla(int id)
         {
+            _logger.LogInformation($"Deleting villa with Id: + {id}.");
+
             if (id == 0)
                 return BadRequest();
 
@@ -111,7 +116,9 @@ namespace MagicVilla_VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult UpdateVilla(int id, [FromBody]VillaDTO villaDTO)
         {
-            if(villaDTO == null || id != villaDTO.Id)
+            _logger.LogInformation($"Updating villa with Id: + {id}.");
+
+            if (villaDTO == null || id != villaDTO.Id)
                 return BadRequest();
 
             var model = new Villa()
@@ -137,6 +144,8 @@ namespace MagicVilla_VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult UpdatePartialVilla(int id, JsonPatchDocument<VillaDTO> patchDTO)
         {
+            _logger.LogInformation($"Partially updating villa with Id: + {id}.");
+
             if (patchDTO == null || id == 0)
                 return BadRequest();
 
